@@ -2,8 +2,8 @@ import { useMutation, useQueryClient } from 'react-query';
 import { useNotification } from '@strapi/helper-plugin';
 import { deleteRequest } from '../utils/deleteRequest';
 
-const bulkRemoveQuery = assetIds => {
-  const promises = assetIds.map(assetId => deleteRequest(assetId));
+const bulkRemoveQuery = (assetIds) => {
+  const promises = assetIds.map((assetId) => deleteRequest('files', assetId));
 
   return Promise.all(promises);
 };
@@ -26,12 +26,12 @@ export const useBulkRemoveAsset = () => {
         },
       });
     },
-    onError: error => {
+    onError: (error) => {
       toggleNotification({ type: 'warning', message: error.message });
     },
   });
 
-  const removeAssets = assetIds => mutation.mutateAsync(assetIds);
+  const removeAssets = (assetIds) => mutation.mutateAsync(assetIds);
 
   return { ...mutation, removeAssets };
 };
