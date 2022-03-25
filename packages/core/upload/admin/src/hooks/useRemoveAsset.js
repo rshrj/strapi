@@ -6,7 +6,7 @@ export const useRemoveAsset = onSuccess => {
   const toggleNotification = useNotification();
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(assetId => deleteRequest('assets', assetId), {
+  const mutation = useMutation(assetId => deleteRequest('files', assetId), {
     onSuccess: () => {
       // Coupled with the cache of useAssets
       queryClient.refetchQueries(['assets'], { active: true });
