@@ -1,5 +1,8 @@
 import axiosInstance from './axiosInstance';
+import getRequestUrl from './getRequestUrl';
 
 export const deleteRequest = (type, id) => {
-  return axiosInstance.delete(`/upload/${type}/${id}`);
+  const url = getRequestUrl(`/${type}/${id}`);
+
+  return axiosInstance.delete(url);
 };
