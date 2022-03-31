@@ -119,7 +119,9 @@ describe('useRemoveFolder', () => {
     });
 
     await waitFor(() =>
-      expect(queryClient.refetchQueries).toHaveBeenCalledWith(['folders'], { active: true })
+      expect(queryClient.refetchQueries).toHaveBeenCalledWith(['upload', 'folders'], {
+        active: true,
+      })
     );
   });
 

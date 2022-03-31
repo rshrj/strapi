@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { useNotification } from '@strapi/helper-plugin';
+
+import pluginId from '../pluginId';
 import { deleteRequest } from '../utils/deleteRequest';
 
 export const useRemoveFolder = () => {
@@ -8,7 +10,7 @@ export const useRemoveFolder = () => {
 
   const mutation = useMutation(id => deleteRequest('folders', id), {
     onSuccess: () => {
-      queryClient.refetchQueries(['folders'], { active: true });
+      queryClient.refetchQueries([pluginId, 'folders'], { active: true });
 
       toggleNotification({
         type: 'success',
