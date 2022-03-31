@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { useNotification } from '@strapi/helper-plugin';
+
+import pluginId from '../pluginId';
 import { removeAssetRequest } from '../utils/removeAssetQuery';
 
 export const useRemoveAsset = onSuccess => {
@@ -9,8 +11,8 @@ export const useRemoveAsset = onSuccess => {
   const mutation = useMutation(assetId => removeAssetRequest(assetId), {
     onSuccess: () => {
       // Coupled with the cache of useAssets
-      queryClient.refetchQueries(['assets'], { active: true });
-      queryClient.refetchQueries(['asset-count'], { active: true });
+      queryClient.refetchQueries([pluginId, 'assets'], { active: true });
+      queryClient.refetchQueries([pluginId, 'asset-count'], { active: true });
 
       toggleNotification({
         type: 'success',
